@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LMS Group Call Dashboard</title>
+<style>
+body{margin:0;padding:0;font-family:Arial,sans-serif;background:#1b1f3b;color:#fff;display:flex;flex-direction:column;align-items:center;}
+h2{color:#4f6dff;text-align:center;margin:10px 0;}
+input,button{padding:10px;margin:5px;border-radius:5px;border:none;}
+button{background:#4f6dff;color:#fff;cursor:pointer;transition:0.3s;}
+button:hover{background:#2b50ff;}
+#loginForm,#dashboardContainer{width:90%;max-width:500px;}
+.hide{display:none;}
+
+/* Dashboard Layout */
+#dashboard{display:flex;flex-wrap:wrap;justify-content:center;width:100%;max-width:1200px;margin-top:10px;gap:10px;}
+#videoGrid{flex:3;min-width:300px;max-width:800px;height:600px;border-radius:10px;overflow:hidden;background:#000;}
+iframe{width:100%;height:100%;border:none;border-radius:10px;}
+#noticePanel{flex:1;min-width:250px;max-width:350px;height:600px;display:flex;flex-direction:column;background:#2b3050;border-radius:10px;overflow:hidden;}
+#chatMessages{flex:1;padding:10px;overflow-y:auto;}
+#chatInput{display:flex;border-top:1px solid #444;}
+#chatInput input{flex:1;padding:10px;border:none;border-radius:0;}
+#chatInput button{padding:10px;background:#4f6dff;color:#fff;border:none;cursor:pointer;}
+#chatInput button:hover{background:#2b50ff;}
+
+/* Mobile Responsive */
+@media(max-width:900px){
+  #dashboard{flex-direction:column;align-items:center;}
+  #videoGrid,#noticePanel{width:95%;height:400px;}
+}
+@media(max-width:500px){
+  #dashboard{flex-direction:column;}
+  #videoGrid,#noticePanel{width:100%;height:300px;}
+}
+</style>
+</head>
+<body>
+
+<h2>📢 LMS Group Call</h2>
+
+<!-- Login Form -->
+<div id="loginForm">
+  <input type="text" id="number" placeholder="Enter Number">
+  <input type="password" id="password" placeholder="Enter Password">
+  <button id="loginBtn">Login</button>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboardContainer" class="hide">
+  <div id="adminControls" class="hide">
+    <input type="text" id="noticeInput" placeholder="Post notice">
+    <button id="postNotice">📣 Post Notice</button>
+    <button id="startCall">🎬 Start Call</button>
+  </div>
+
+  <div id="studentControls" class="hide">
+    <button id="joinCall">📞 Join Call</button>
+  </div>
+
+  <div id="dashboard">
+    <div id="videoGrid"></div>
+    <div id="noticePanel">
+      <div id="chatMessages"></div>
+      <div id="chatInput">
+        <input type="text" id="chatMsg" placeholder="Type message...">
+        <button id="sendMsg">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+import { getDatabase, ref, push, onChildAdded, update } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+/* Firebase Config */
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_DOMAIN",
+  databaseURL: "YOUR_DB_URL",
+  projectId: "YOUR_PROJECT_ID"
+};
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+/* Admin credentials */
+const adminNumber="12345", adminPass="adminpass";
+
+/* Student credentials (5 students) */
+const studentList={
+  "111":{password:"pass1", used:false},
+  "222":{password:"pass2", used:false},
+  "333":{password:"pass3", used:false},
+  "444":{password:"pass4", used:false},
+  "555":{password:"pass5", used:false}
+};
+
+/* Login logic */
+const loginBtn=document.getElementById("loginBtn");
+loginBtn.onclick=async ()=>{
+  const num=document.getElementById("number").value;
+  const pass=document.getElementById("password").value;
+
+  if(num===adminNumber && pass===adminPass){
+    document.getElementById("loginForm").classList.add("hide");
+    document.getElementById("dashboardContainer").classList.remove("hide");
+    document.getElementById("adminControls").classList.remove("hide");
+    window.role="admin";
+  } else if(studentList[num] && studentList[num].password===pass && studentList[num].used===false){
+    // Mark as used
+    studentList[num].used=true;
+    document.getElementById("loginForm").classList.add("hide");
+    document.getElementById("dashboardContainer").classList.remove("hide");
+    document.getElementById("studentControls").classList.remove("hide");
+    window.role="student";
+  } else {
+    alert("Invalid credentials or already used");
+  }
+};
+
+/* Room Name */
+const roomName="LMSGroupCallRoom123";
+
+/* Admin Start Call */
+document.getElementById("startCall").onclick=()=>{
+  document.getElementById("videoGrid").innerHTML=`<iframe src="https://meet.jit.si/${roomName}#config.startWithAudioMuted=false&config.startWithVideoMuted=false&config.prejoinPageEnabled=false&interfaceConfig.TOOLBAR_BUTTONS=['microphone','camera','hangup','chat','tileview','fullscreen']" allow="camera;microphone;fullscreen"></iframe>`;
+};
+
+/* Student Join Call */
+document.getElementById("joinCall").onclick=()=>{
+  document.getElementById("videoGrid").innerHTML=`<iframe src="https://meet.jit.si/${roomName}#config.startWithAudioMuted=false&config.startWithVideoMuted=false&config.prejoinPageEnabled=false&interfaceConfig.TOOLBAR_BUTTONS=['microphone','camera','hangup','chat','tileview','fullscreen']" allow="camera;microphone;fullscreen"></iframe>`;
+};
+
+/* Persistent Chat */
+const chatRef = ref(db, 'chat');
+const sendBtn=document.getElementById("sendMsg");
+const chatInput=document.getElementById("chatMsg");
+
+sendBtn.onclick=()=>{ 
+  const msg=chatInput.value.trim();
+  if(msg==="")return;
+  push(chatRef,{message:msg, role: window.role});
+  chatInput.value="";
+};
+
+onChildAdded(chatRef,(data)=>{
+  const p=document.createElement("p");
+  const r=data.val().role==="admin"?"👑 Admin":"💬 Student";
+  p.textContent=r+": "+data.val().message;
+  document.getElementById("chatMessages").appendChild(p);
+  document.getElementById("chatMessages").scrollTop=document.getElementById("chatMessages").scrollHeight;
+});
+
+/* Notices */
+const noticeRef=ref(db,'notices');
+document.getElementById("postNotice").onclick=()=>{
+  const msg=document.getElementById("noticeInput").value.trim();
+  if(msg==="")return;
+  push(noticeRef,{notice:msg});
+  document.getElementById("noticeInput").value="";
+};
+
+onChildAdded(noticeRef,(data)=>{
+  const n=document.createElement("p");
+  n.textContent="📢 "+data.val().notice;
+  document.getElementById("chatMessages").appendChild(n);
+});
+</script>
+
+</body>
+</html>
+
