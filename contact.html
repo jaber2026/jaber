@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Jaber Bin Razzak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <link rel="icon" href="logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.webp" type="image/x-icon">
+    <link rel="apple-touch-icon" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="72x72" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="114x114" href="logo.webp">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     <link rel="stylesheet" href="style.css">
+  
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --accent: #66BB6A;
+            --light-green: #E8F5E9;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Anek Bangla', sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1400px;
+            height: var(--header-height);
+            background: linear-gradient(135deg, 
+                rgba(26, 35, 126, 0.95),
+                rgba(57, 73, 171, 0.95)
+            );
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            box-shadow: 
+                0 10px 30px rgba(26, 35, 126, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .header.scrolled {
+            top: 10px;
+            height: 70px;
+            background: linear-gradient(135deg, 
+                rgba(26, 35, 126, 0.98),
+                rgba(57, 73, 171, 0.98)
+            );
+        }
+
+        .header-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            color:rgb(232, 245, 255);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color:rgb(223, 241, 255);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .hamburger:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: white;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Enhanced Login Button Styles */
+        .login-button {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a237e;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+            text-decoration: none;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            background: white;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.2);
+        }
+
+        /* Mobile Login Button Styles */
+        @media (max-width: 968px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 90%;
+                max-width: 400px;
+                background: rgba(26, 35, 126, 0.98);
+                flex-direction: column;
+                padding: 1.5rem;
+                border-radius: 20px;
+                transition: 0.3s ease;
+                gap: 0.3rem;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-menu.active {
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 0.6rem;
+            }
+
+            .login-button {
+                width: 100%;
+                justify-content: center;
+                margin: 0.5rem 0 0 0;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                top: 10px;
+            }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Add intermediate breakpoint for tablets */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .logo img {
+                height: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="logo.webp" alt="Mohammad Jaber Bin Razzak Logo">
+                <span class="logo-text">Mohammad Jaber Bin Razzak</span>
+            </a>
+            <nav>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-menu">
+                     <a href="index.html" class="nav-link ">Home</a>
+                    <a href="about.html" class="nav-link ">About</a>
+                    <a href="courses.html" class="nav-link ">Programs </a>
+                    <a href="gallery.html" class="nav-link ">Gallery</a>
+                    <a href="notice.html" class="nav-link ">Web Development</a>
+                    <a href="notic.html" class="nav-link ">Notices</a> 
+                    <a href="rec_classes.html" class="nav-link ">Class</a>
+                    <a href="file.html" class="nav-link ">Files</a>
+                    <a href="contact.html" class="nav-link active">Contact</a>
+                  <a href="student_login.html" class="login-button">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                       
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Enhanced hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const body = document.body;
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && 
+                !navMenu.contains(e.target) && 
+                navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link, .login-button').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html> 
+<style>
+    .contact-section {
+        padding: 120px 3% 80px;
+        background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #E8EAF6 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(144, 202, 249, 0.1) 0%, transparent 25%),
+            radial-gradient(circle at 80% 80%, rgba(26, 35, 126, 0.1) 0%, transparent 25%);
+        pointer-events: none;
+    }
+
+    .contact-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        padding: 0 0.5rem;
+    }
+
+    .section-title {
+        font-size: 2.8rem;
+        color: #1a237e;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        font-weight: 700;
+        margin-top: 10px;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 4rem;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .contact-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 3rem;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(26, 35, 126, 0.1);
+    }
+
+    .contact-info-section {
+        background: linear-gradient(135deg, #3949ab, #1a237e);
+        padding: 3rem 2rem;
+        color: white;
+    }
+
+    .contact-info-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+    }
+
+    .contact-info-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .contact-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1.8rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+    }
+
+    .contact-info-item:hover {
+        transform: translateY(-2px);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .contact-info-item i {
+        font-size: 1.5rem;
+        width: 2rem;
+        text-align: center;
+    }
+
+    .contact-info-content h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .contact-info-content p {
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+
+    .contact-info-content small {
+        display: block;
+        opacity: 0.8;
+        margin-top: 0.3rem;
+        font-size: 0.9rem;
+    }
+
+    .contact-social-links {
+        margin-top: 2rem;
+        display: flex;
+        gap: 1rem;
+    }
+
+    .contact-social-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .contact-social-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+    }
+
+    .contact-form {
+        padding: 3rem;
+    }
+
+    .form-title {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #2c3e50;
+        font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 1px solid rgba(26, 35, 126, 0.2);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #3949ab;
+        box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+        background: rgba(46, 125, 50, 0.02);
+    }
+
+    .form-group textarea {
+        height: 150px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.8rem;
+        background: linear-gradient(45deg, #3949ab, #90caf9);
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(26, 35, 126, 0.2);
+    }
+
+    .submit-btn:hover {
+        background: linear-gradient(45deg, #90caf9, #3949ab);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    .submit-btn i {
+        transition: transform 0.3s ease;
+    }
+
+    .submit-btn:hover i {
+        transform: translateX(5px);
+    }
+
+    /* Map styles */
+    .map-section {
+        margin-top: 4rem;
+    }
+
+    .map-section-title {
+        font-size: 1.8rem;
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    .map-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .map-tab {
+        padding: 0.8rem 2rem;
+        background: white;
+        border: 2px solid rgba(26, 35, 126, 0.2);
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        color: #3949ab;
+    }
+
+    .map-tab.active {
+        background: linear-gradient(45deg, #3949ab, #90caf9);
+        color: white;
+        border-color: #3949ab;
+    }
+
+    .map-tab:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(46, 125, 50, 0.1);
+    }
+
+    .maps-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .map-frame {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(26, 35, 126, 0.1);
+        background: white;
+        height: 400px;
+    }
+
+    .map-frame iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .map-info {
+        padding: 1.5rem;
+        background: white;
+        border-radius: 12px;
+        margin-top: 1rem;
+        box-shadow: 0 4px 15px rgba(46, 125, 50, 0.05);
+    }
+
+    .map-info h4 {
+        color: #1a237e;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .map-info p {
+        color: #666;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 992px) {
+        .contact-wrapper {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .contact-info-section {
+            border-radius: 20px 20px 0 0;
+            padding: 2rem;
+        }
+
+        .contact-form {
+            padding: 2rem;
+        }
+
+        .maps-container {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .map-frame {
+            height: 350px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .contact-section {
+            padding: 80px 3% 40px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-top: 2rem;
+        }
+
+        .section-subtitle {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-item {
+            padding: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-info-item i {
+            font-size: 1.2rem;
+            width: 1.5rem;
+        }
+
+        .contact-info-content h4 {
+            font-size: 1rem;
+        }
+
+        .contact-info-content p {
+            font-size: 0.9rem;
+        }
+
+        .contact-form {
+            padding: 1.5rem;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.7rem;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+        }
+
+        .submit-btn {
+            padding: 0.8rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-social-links {
+            justify-content: center;
+        }
+
+        .contact-social-link {
+            width: 35px;
+            height: 35px;
+        }
+
+        .map-section {
+            margin-top: 2rem;
+        }
+
+        .map-section-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .map-frame {
+            height: 250px;
+        }
+
+        .map-info {
+            padding: 1rem;
+        }
+
+        .map-info h4 {
+            font-size: 1rem;
+        }
+
+        .map-info p {
+            font-size: 0.9rem;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        input, 
+        textarea, 
+        select, 
+        button {
+            min-height: 44px;
+        }
+
+        .contact-info-section {
+            padding: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info-title {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        .contact-social-links {
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-row {
+            margin-bottom: 0.5rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .contact-section {
+            padding: 70px 3% 30px;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info-item {
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            padding: 1rem;
+        }
+
+        .contact-info-item i {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-form {
+            padding: 1.2rem;
+        }
+
+        .map-frame {
+            height: 200px;
+        }
+
+        .map-info {
+            text-align: center;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem;
+        }
+
+        .contact-info-section {
+            padding: 1rem;
+        }
+
+        .contact-info-item {
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .contact-info-title {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    /* Add to your existing styles */
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .map-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        overflow: hidden;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .map-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+</style>
+
+<section class="contact-section">
+    <div class="contact-container">
+        <h1 class="section-title">Contact Us</h1>
+        <p class="section-subtitle">Get in touch with us for any questions or inquiries</p>
+
+        <div class="contact-wrapper">
+            <div class="contact-info-section">
+                <h2 class="contact-info-title">Get In Touch</h2>
+                <ul class="contact-info-list">
+                    <li class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-info-content">
+                            <h4>Main Branch</h4>
+                            <p>Malotinagor Matir Mosjid Lane, Bogura</p>
+                            <!-- <p><small>Near Science Laboratory</small></p> -->
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="contact-info-content">
+                            <h4>Second Branch</h4>
+                            <p>Fulbari Mohila College,Bogura</p>
+                            
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <i class="fas fa-phone"></i>
+                        <div class="contact-info-content">
+                            <h4>Phone</h4>
+                            <p>+880 1870-635347</p>
+                            <p>+880 1791-734680</p>
+                        </div>
+                    </li>
+                    <li class="contact-info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div class="contact-info-content">
+                            <h4>Email</h4>
+                            <p>jaber69y9@gmail.com</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <div class="contact-social-links">
+                    <a href="https://www.facebook.com/md.jaber.bin.razzak" target="_blank" class="contact-social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/channel/UCU5p4CqBgefJmY-fnjnYl2Q" target="_blank" class="contact-social-link"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammed-jaber-bin-razzak-ba099a398/" target="_blank" class="contact-social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jaber69y9-cmd" target="_blank" class="contact-social-link"><i class="fab fa-github"></i></a>
+                      <a href="t.me/jaber69y9" target="_blank" class="contact-social-link"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+
+            <div class="contact-form" >
+                <h2 class="form-title">Send Message</h2>
+                <form id="contactForm" action="https://formspree.io/f/xykyrllo" method="POST">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{11}" placeholder="01XXXXXXXXX" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="current_class">Profession</label>
+                        <input type="text" id="current_class" name="current_class" required>
+                    </div>
+                       <div class="form-group">
+                        <label for="current_class">Email</label>
+                        <input type="email" id="email" name="current_class" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="school">School Name</label>
+                            <input type="text" id="school" name="school">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="college">College Name</label>
+                            <input type="text" id="college" name="college">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i>
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+ 
+
+    
+
+
+
+    
+
+
+
+
+
+
+        <div class="map-section">
+            <h2 class="map-section-title">Our Locations</h2>
+            <div class="maps-container">
+                <div class="map-wrapper">
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d226.30039288201777!2d89.38297103221903!3d24.83629741530739!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fc54c16b122e79%3A0x3a61cc21e3580482!2sBaitul%20Aman%20Jame%20(Matir)%20Mosque!5e0!3m2!1sen!2sbd!4v1767153768134!5m2!1sen!2sbd"
+                            width="100%" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="map-info">
+                        <h4>Main Branch</h4>
+                        <p>Malotinagor Matir Moasjid Lane, Bogura</p>
+                        <!-- <p><small>Near Science Laboratory</small></p> -->
+                    </div>
+                </div>
+
+                <div class="map-wrapper">
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2152.444283833763!2d89.37145122380663!3d24.865032498169853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1767342202746!5m2!1sen!2sbd"
+                            width="100%" 
+                            height="450" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                    <div class="map-info">
+                        <h4>Second Branch</h4>
+                        <p>Fulbari Mohila College,Bogura</p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Mohammad Jaber Bin Razzak</h3>
+                <p>Excellence in Web Developing</p>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/md.jaber.bin.razzak" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/channel/UCU5p4CqBgefJmY-fnjnYl2Q" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammed-jaber-bin-razzak-ba099a398/" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jaber69y9-cmd" target="_blank" class="github"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/her_jaber/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.threads.com/@her_jaber" target="_blank" class="threads"><i class="fab fa-threads"></i></a>
+                    <a href="https://x.com/jaber69y9" target="_blank" class="x"><i class="fab fa-x"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-phone"></i> +8801870635347</p>
+                <p><i class="fab fa-whatsapp"></i>+8801870635347</p>
+                <p><i class="fas fa-envelope"></i>jaber69y9@gmail.com</p>                
+                <p><i class="fas fa-location-dot"></i>Malotinagor Matir Mosjid Lane, Bogura</p>
+                <p><i class="fas fa-location-dot"></i>Fulbari MOhila College, Bogura</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mohammad Jaber Bin Razzak. All rights reserved.</p>
+            <p class="developer-info">Developed by <a href="dev.html" target="_blank"> Mohammad Jaber Bin Razzak</a> </p>
+        </div>
+    </footer>
+
+    <style>
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #1a237e 0%, #0d1642 100%);
+            color: white;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a237e, #90caf9, #1a237e);
+            background-size: 200% 100%;
+            animation: gradientMove 3s linear infinite;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .footer-section:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .footer-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #90caf9;
+            transition: width 0.3s ease;
+        }
+
+        .footer-section:hover h3::after {
+            width: 100%;
+        }
+
+        .footer-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: #90caf9;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 1rem;
+            transform: translateX(0);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        .footer-section ul li a::before {
+            content: '→';
+            margin-right: 8px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            position: absolute;
+            left: -15px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #90caf9;
+            transform: translateX(5px);
+        }
+
+        .footer-section ul li a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            text-decoration: none;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.4rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            text-decoration: none !important;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a237e, #3949ab);
+            opacity: 0;
+            transition: all 0.4s ease;
+            transform: translateY(100%);
+            z-index: 1;
+            text-decoration: none;
+        }
+
+        .social-links a i {
+            position: relative;
+            z-index: 2;
+            margin: 0;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+        }
+
+        .social-links a:hover::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .social-links a:hover i {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .social-links a.facebook::before {
+            background: linear-gradient(45deg, #1877F2, #3b5998);
+        }
+
+        .social-links a.youtube::before {
+            background: linear-gradient(45deg, #FF0000, #c4302b);
+        }
+
+        .social-links a.group::before {
+            background: linear-gradient(45deg, #1a237e, #3949ab);
+        }
+
+        .social-links a.group i {
+            font-size: 1.2rem;
+        }
+
+        .footer-section i {
+            margin-right: 12px;
+            color: #90caf9;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section p:hover i {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #90caf9;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-info {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .developer-info a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .developer-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #90caf9;
+            transition: width 0.3s ease;
+        }
+
+        .developer-info a:hover {
+            color: #fff;
+        }
+
+        .developer-info a:hover::after {
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+
+        /* Responsive Footer */
+        @media (max-width: 768px) {
+            footer {
+                padding: 4rem 1.5rem 1.5rem;
+            }
+
+            .footer-content {
+                gap: 2.5rem;
+            }
+
+            .footer-section {
+                text-align: center;
+                padding: 0 1rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .footer-section p {
+                font-size: 0.95rem;
+            }
+
+            .footer-section ul {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
+            .footer-section ul li {
+                margin-bottom: 1rem;
+            }
+
+            .footer-section ul li a {
+                font-size: 0.95rem;
+            }
+
+            .social-links {
+                justify-content: center;
+                gap: 1.2rem;
+                margin-top: 1.5rem;
+            }
+
+            .footer-bottom {
+                margin-top: 3rem;
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 3rem 1rem 1rem;
+            }
+
+            .footer-content {
+                gap: 2rem;
+            }
+
+            .footer-section {
+                padding: 0;
+            }
+
+            .footer-section h3 {
+                font-size: 1.6rem;
+            }
+
+            .footer-section h4 {
+                font-size: 1.2rem;
+            }
+
+            .footer-section p {
+                font-size: 0.9rem;
+            }
+
+            .footer-section ul {
+                max-width: 180px;
+            }
+
+            .footer-section ul li {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-section ul li a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .social-links a {
+                width: 38px;
+                height: 38px;
+                font-size: 1.2rem;
+            }
+
+            .social-links a.group i {
+                font-size: 1.1rem;
+            }
+
+            .footer-bottom {
+                margin-top: 2rem;
+                padding: 1.2rem 0.5rem;
+            }
+
+            .footer-bottom p {
+                font-size: 0.85rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .developer-info {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+
+
+
+<script>
+// Page load houar por shathe shathe shob field khali korbe
+  window.onload = function() {
+    document.getElementById("contactForm").reset();
+  };
+
+  // Back button chepe ashleo field khali korbe
+  window.onpageshow = function(event) {
+    if (event.persisted) {
+      document.getElementById("contactForm").reset();
+    }
+  };
+
+  // Browser-ke bolbe input gulo save na korte
+  const inputs = document.querySelectorAll('input, textarea');
+  inputs.forEach(input => {
+    input.setAttribute('autocomplete', 'off');
+  });
+          
+</script>
+
+      <script src="app.js"></script>
+      
+  </body>
+  </html>
+
+
+
+

@@ -1,0 +1,18 @@
+/* লেখা সিলেক্ট করা বন্ধ করার জন্য */
+body {
+  -webkit-user-select: none; /* Chrome, Safari */
+    -moz-user-select: none;    /* Firefox */
+    -ms-user-select: none;     /* IE/Edge */
+    user-select: none;         /* Standard */
+}
+
+
+
+
+
+
+
+
+
+/* লিঙ্কগুলো যেন কপি বা ড্র্যাগ করা না যায় */
+

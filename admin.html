@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mohammad Jaber Bin Razzak</title>
+     <link rel="icon" href="logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.webp" type="image/x-icon">
+    <link rel="apple-touch-icon" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="72x72" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="114x114" href="logo.webp">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+        body { margin: 0; background: #f0f2f5; font-family: 'Inter', sans-serif; height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        .header { height: 70px; background: linear-gradient(135deg, #1c277e, #3949ab); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.2); z-index: 1000; }
+        .title-text { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 28px; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .main-wrapper { flex-grow: 1; padding: 10px; display: flex; justify-content: center; align-items: center; background: #dfe4ea; }
+        .video-box { width: 100%; height: 100%; background: #000; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 4px solid #fff; }
+        .nav-btn { padding: 8px 18px; border-radius: 50px; font-weight: 700; font-size: 12px; border: none; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .btn-live { background: #27ae60; color: white; }
+        .btn-live:hover { background: #2ecc71; transform: scale(1.05); }
+        .btn-logout { background: #eb4d4b; color: white; }
+        .btn-logout:hover { background: #ff7675; transform: scale(1.05); }
+        @media (max-width: 576px) { .title-text { font-size: 14px; } .nav-btn { padding: 6px 12px; font-size: 10px; } }
+    </style>
+</head>
+<body>
+<div class="header">
+    <button class="nav-btn btn-live" onclick="location.reload()"><i class="fas fa-sync-alt"></i> Start Class</button>
+    <div class="title-text text-uppercase">Admin Dashboard</div>
+    <a href="index.html" class="nav-btn btn-logout"><i class="fas fa-power-off"></i> LOGOUT</a>
+</div>
+<div class="main-wrapper">
+    <div class="video-box" id="meet-container"></div>
+</div>
+<script src='https://meet.jit.si/external_api.js'></script>
+<script>
+    const options = {
+        roomName: '🖥️Our Live Class🖥️',
+        width: '100%', height: '100%',
+        parentNode: document.querySelector('#meet-container'),
+        userInfo: { displayName: 'Admin' },
+        configOverwrite: { prejoinPageEnabled: false, disableChat: true },
+        interfaceConfigOverwrite: {
+            TOOLBAR_BUTTONS: ['microphone', 'camera', 'desktop', 'fullscreen', 'recording', 'settings', 'tileview', 'mute-everyone', 'security', 'hangup'],
+            SHOW_JITSI_WATERMARK: false, SHOW_BRAND_WATERMARK: false, MOBILE_APP_PROMO: false
+        }
+    };
+    const api = new JitsiMeetExternalAPI('meet.jit.si', options);
+
+    // অ্যাডমিন কল কাটলে সবার জন্য ক্লাস শেষ হয়ে যাবে
+    api.addEventListener('videoConferenceTerminate', () => {
+        api.executeCommand('endConference');
+        window.location.href = "index.html"; 
+    });
+</script>
+
+<footer>
+    <div class="footer-bottom">
+            <p>&copy; 2026 Mohammad Jaber Bin Razzak. All rights reserved.</p>
+            <p class="developer-info">Developed by <a href="dev_info" target="_blank"> Mohammad Jaber Bin Razzak</a> </p>
+        </div>
+        <style>
+            footer {
+            background: linear-gradient(135deg, #1a237e 0%, #0d1642 100%);
+            color: white;
+           
+            position: relative;
+            overflow: hidden;
+        }
+            .footer-bottom {
+            text-align: center;
+           
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+          
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #90caf9;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-info {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .developer-info a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .developer-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #90caf9;
+            transition: width 0.3s ease;
+        }
+
+        .developer-info a:hover {
+            color: #fff;
+        }
+
+        .developer-info a:hover::after {
+            width: 100%;
+        }
+        </style>
+
+
+</body>
+<script src="app.js"></script>
+</html>

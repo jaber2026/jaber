@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Profiles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="icon" href="logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.webp" type="image/x-icon">
+    <link rel="apple-touch-icon" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="72x72" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="114x114" href="logo.webp">
+     <link rel="stylesheet" href="style.css">
+  
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Anek Bangla', sans-serif;
+        }
+
+        body {
+            background: #0a192f;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(100, 181, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(26, 35, 126, 0.1) 0%, transparent 50%),
+                linear-gradient(45deg, transparent 48%, rgba(100, 181, 246, 0.1) 49%, rgba(100, 181, 246, 0.1) 51%, transparent 52%);
+            background-size: 200% 200%;
+            animation: gradientBG 15s ease infinite;
+            z-index: -1;
+        }
+
+        .tech-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, transparent 1px, rgba(100, 181, 246, 0.05) 1px) 0 0 / 20px 20px,
+                linear-gradient(transparent 1px, rgba(100, 181, 246, 0.05) 1px) 0 0 / 20px 20px;
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .shape {
+            position: absolute;
+            background: rgba(100, 181, 246, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 20%;
+            animation-delay: -10s;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a192f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: #ffffff;
+        }
+
+        .loading-content {
+            width: 80%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .loading-line {
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .loading-line.visible {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.5s ease;
+        }
+
+        .loading-line::before {
+            content: '>';
+            margin-right: 10px;
+            color: #64b5f6;
+            animation: pulse 1s infinite;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 0;
+            background: #64b5f6;
+            animation: progress 3s ease-in-out forwards;
+        }
+
+        .profiles-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+            max-width: 1200px;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            padding: 20px 0;
+            perspective: 1000px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 10px;
+            transform-style: preserve-3d;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(100, 181, 246, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(100, 181, 246, 0.2);
+        }
+
+        .container:hover::before {
+            transform: translateX(100%);
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(100, 181, 246, 0.3);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.1);
+            transform-style: preserve-3d;
+        }
+
+        .profile-img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 30%, rgba(100, 181, 246, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .profile-img:hover::after {
+            opacity: 1;
+        }
+
+        .profile-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            transform: translateZ(20px);
+        }
+
+        .profile-img:hover img {
+            transform: scale(1.1) translateZ(30px);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(100, 181, 246, 0.3);
+            transform: translateZ(20px);
+        }
+
+        .role {
+            color: #64b5f6;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(100, 181, 246, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            transform: translateZ(15px);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            transform: translateZ(10px);
+        }
+
+        .social-links a {
+            color: #ffffff;
+            font-size: 1.5rem;
+            transition: all 0.5s ease;
+            text-decoration: none;
+            background: rgba(100, 181, 246, 0.1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            transform-style: preserve-3d;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(100, 181, 246, 0.2) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .social-links a:hover::before {
+            transform: scale(1.5);
+        }
+
+        .social-links a:hover {
+            background: rgba(100, 181, 246, 0.2);
+            transform: translateY(-5px) translateZ(20px);
+            border: 1px solid rgba(100, 181, 246, 0.4);
+        }
+
+        @keyframes progress {
+            0% { width: 0; }
+            100% { width: 100%; }
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        @keyframes gridMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(20px); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -10px) rotate(5deg); }
+            50% { transform: translate(-5px, 5px) rotate(-5deg); }
+            75% { transform: translate(-10px, -5px) rotate(5deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                min-height: auto;
+                height: auto;
+                overflow-x: hidden;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .profiles-container {
+                padding: 10px 0;
+                gap: 20px;
+                perspective: none;
+            }
+
+            .container {
+                padding: 20px;
+                margin: 10px 0;
+                transform-style: flat;
+                touch-action: manipulation;
+            }
+
+            .container:hover {
+                transform: translateY(-5px);
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+                transform-style: flat;
+            }
+
+            .profile-img img {
+                transform: none;
+            }
+
+            .profile-img:hover img {
+                transform: scale(1.05);
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                transform: none;
+            }
+
+            .role {
+                font-size: 1rem;
+                padding: 4px 12px;
+                transform: none;
+            }
+
+            .social-links {
+                gap: 15px;
+                transform: none;
+            }
+
+            .social-links a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+                transform-style: flat;
+            }
+
+            .social-links a:hover {
+                transform: translateY(-3px);
+            }
+
+            /* Disable complex animations on mobile */
+            .floating-shapes {
+                display: none;
+            }
+
+            .tech-grid {
+                animation: none;
+            }
+
+            body::before {
+                animation: none;
+            }
+
+            /* Improve touch targets */
+            .social-links a {
+                padding: 10px;
+                min-width: 44px;
+                min-height: 44px;
+            }
+
+            .container {
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* Optimize performance */
+            .container::before,
+            .profile-img::after,
+            .social-links a::before {
+                display: none;
+            }
+
+            /* Loading screen adjustments */
+            .loading-content {
+                width: 90%;
+                padding: 20px;
+            }
+
+            .loading-line {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Additional mobile optimizations */
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .profile-img {
+                width: 100px;
+                height: 100px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .role {
+                font-size: 0.9rem;
+                padding: 3px 10px;
+            }
+
+            .social-links {
+                gap: 10px;
+            }
+
+            .social-links a {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Prevent text selection on mobile */
+        @media (hover: none) {
+            * {
+                -webkit-tap-highlight-color: transparent;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                user-select: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tech-grid"></div>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-line">Loading developer profiles...</div>
+            <div class="loading-line">Establishing connection...</div>
+            <div class="loading-line">Preparing content...</div>
+            <div class="progress-bar"></div>
+        </div>
+    </div>
+
+   
+        <div class="container">
+            <div class="profile-img">
+                <img src="image.webp" alt="Mohammad Jaber Bin Razzak">
+            </div>
+            <h1>Mohammad Jaber Bin Razzak</h1>
+            <p class="role">Founder & Developer</p>
+            <div class="social-links">
+               <a href="https://www.facebook.com/md.jaber.bin.razzak" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/channel/UCU5p4CqBgefJmY-fnjnYl2Q" target="_blank"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammed-jaber-bin-razzak-ba099a398/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jaber69y9-cmd" target="_blank" ><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/her_jaber/" target="_blank"><i class="fab fa-instagram"></i></a>
+                     <a href="https://x.com/jaber69y9" target="_blank"><i class="fab fa-x"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Loading animation
+        const loadingLines = document.querySelectorAll('.loading-line');
+        const loadingScreen = document.querySelector('.loading-screen');
+
+        // Show lines sequentially
+        loadingLines.forEach((line, index) => {
+            setTimeout(() => {
+                line.classList.add('visible');
+            }, index * 800);
+        });
+
+        // Remove loading screen after animation
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+            }, 500);
+        }, 3000);
+
+        // 3D hover effect
+        document.querySelectorAll('.container').forEach(container => {
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 10;
+                const rotateY = (centerX - x) / 10;
+                
+                container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(20px)`;
+            });
+            
+            container.addEventListener('mouseleave', () => {
+                container.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+            });
+        });
+    </script>
+      <script src="app.js"></script>
+   
+</body>
+</html> 

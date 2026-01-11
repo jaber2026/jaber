@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohammad Jaber Bin Razzak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="icon" href="logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="logo.webp" type="image/x-icon">
+    <link rel="apple-touch-icon" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="72x72" href="logo.webp">
+    <link rel="apple-touch-icon" sizes="114x114" href="logo.webp">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --accent: #66BB6A;
+            --light-green: #E8F5E9;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Anek Bangla', sans-serif;
+        }
+
+        .header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 95%;
+            max-width: 1400px;
+            height: var(--header-height);
+            background: linear-gradient(135deg, 
+                rgba(26, 35, 126, 0.95),
+                rgba(57, 73, 171, 0.95)
+            );
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            box-shadow: 
+                0 10px 30px rgba(26, 35, 126, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .header.scrolled {
+            top: 10px;
+            height: 70px;
+            background: linear-gradient(135deg, 
+                rgba(26, 35, 126, 0.98),
+                rgba(57, 73, 171, 0.98)
+            );
+        }
+
+        .header-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.4rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+            color:rgb(232, 245, 255);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color:rgb(223, 241, 255);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            padding: 0.8rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .hamburger:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 2px;
+            background: white;
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hamburger Animation */
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-20px);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Enhanced Login Button Styles */
+        .login-button {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a237e;
+            padding: 0.6rem 1.2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+            text-decoration: none;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            background: white;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.2);
+        }
+
+        /* Mobile Login Button Styles */
+        @media (max-width: 968px) {
+            .hamburger {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                left: -100%;
+                width: 90%;
+                max-width: 400px;
+                background: rgba(26, 35, 126, 0.98);
+                flex-direction: column;
+                padding: 1.5rem;
+                border-radius: 20px;
+                transition: 0.3s ease;
+                gap: 0.3rem;
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-menu.active {
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-link {
+                width: 100%;
+                text-align: center;
+                padding: 0.6rem;
+            }
+
+            .login-button {
+                width: 100%;
+                justify-content: center;
+                margin: 0.5rem 0 0 0;
+                padding: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                top: 10px;
+            }
+
+            .logo img {
+                height: 32px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Add intermediate breakpoint for tablets */
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 1.2rem;
+            }
+
+            .logo img {
+                height: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+             <a href="index.html" class="logo">
+                <img src="logo.webp" alt="Mohammad Jaber Bin Razzak Logo">
+                <span class="logo-text">Mohammad Jaber Bin Razzak</span>
+            </a>
+            <nav>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-menu">
+                    <a href="index.html" class="nav-link ">Home</a>
+                    <a href="about.html" class="nav-link ">About</a>
+                    <a href="courses.html" class="nav-link active">Programs </a>
+                    <a href="gallery.html" class="nav-link ">Gallery</a>
+                    <a href="notice.html" class="nav-link ">Web Development</a>
+                    <a href="notic.html" class="nav-link ">Notices</a> 
+                    <a href="rec_classes.html" class="nav-link ">Class</a>
+                    <a href="file.html" class="nav-link ">Files</a>
+                    <a href="contact.html" class="nav-link ">Contact</a>
+                    <a href="student_login.html" class="login-button">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Login</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Enhanced hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+        const body = document.body;
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            
+            // Prevent body scroll when menu is open
+            if (navMenu.classList.contains('active')) {
+                body.style.overflow = 'hidden';
+            } else {
+                body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && 
+                !navMenu.contains(e.target) && 
+                navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
+            }
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-link, .login-button').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html> 
+
+<style>
+    .courses-section {
+        padding: 100px 3% 60px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #E3F2FD 0%, #FFFFFF 50%, #E8EAF6 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .courses-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+        padding: 0 0.5rem;
+    }
+
+    .section-title {
+        font-size: 2.8rem;
+        color: #1a237e;
+        margin-bottom: 0.5rem;
+        margin-top: 2rem;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .section-subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 4rem;
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .class-courses {
+        margin-bottom: 4rem;
+    }
+
+    .class-title {
+        font-size: 1.8rem;
+        color: #1a237e;
+        margin-bottom: 2rem;
+        padding-left: 1rem;
+        border-left: 4px solid #3949ab;
+    }
+
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .course-card {
+        background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.95),
+            rgba(255, 255, 255, 0.98)
+        );
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 
+            0 15px 35px rgba(26, 35, 126, 0.1),
+            0 0 0 1px rgba(26, 35, 126, 0.05);
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        backdrop-filter: blur(10px);
+    }
+
+    .course-card:hover {
+        transform: translateY(-8px) scale(1.01);
+        box-shadow: 
+            0 25px 45px rgba(26, 35, 126, 0.15),
+            0 0 0 1px rgba(26, 35, 126, 0.1);
+    }
+
+    .course-header {
+        background: linear-gradient(
+            135deg,
+            #3949ab,
+            #1a237e
+        );
+        padding: 2rem;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .course-header::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transform: translate(30%, -30%);
+    }
+
+    .course-name {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        position: relative;
+    }
+
+    .course-content {
+        padding: 2rem;
+    }
+
+    .course-description {
+        color: #444;
+        line-height: 1.8;
+        margin-bottom: 2rem;
+        font-size: 1rem;
+    }
+
+    .course-meta {
+        display: grid;
+        gap: 1.2rem;
+        background: rgba(46, 125, 50, 0.03);
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        color: #3949ab;
+        font-size: 1rem;
+    }
+
+    .meta-item i {
+        color: #3949ab;
+        font-size: 1.2rem;
+        opacity: 0.9;
+        width: 1.8rem;
+        text-align: center;
+    }
+
+    .course-footer {
+        padding: 1.5rem 2rem;
+        border-top: 1px solid rgba(46, 125, 50, 0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(46, 125, 50, 0.02);
+    }
+
+    .course-fee {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #1a237e;
+    }
+
+    .course-fee small {
+        display: block;
+        font-size: 0.85rem;
+        color: #666;
+        font-weight: 500;
+    }
+
+    .enroll-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem 2rem;
+        background: linear-gradient(45deg, #3949ab, #90caf9);
+        color: white;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(26, 35, 126, 0.2);
+    }
+
+    .enroll-btn:hover {
+        background: linear-gradient(45deg, #90caf9, #3949ab);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(26, 35, 126, 0.3);
+    }
+
+    .no-courses {
+        text-align: center;
+        padding: 4rem 2rem;
+        background: rgba(46, 125, 50, 0.03);
+        border-radius: 20px;
+        color: #666;
+    }
+
+    .no-courses i {
+        font-size: 3rem;
+        color: #1a237e;
+        margin-bottom: 1.5rem;
+        opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+        .courses-section {
+            padding: 90px 3% 50px;
+        }
+
+        .courses-grid {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        .class-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-header {
+            padding: 1.5rem;
+        }
+
+        .course-name {
+            font-size: 1.2rem;
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-meta {
+            padding: 1.2rem;
+        }
+
+        .course-footer {
+            padding: 1.2rem 1.5rem;
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    /* Add decorative elements */
+    .courses-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+            radial-gradient(circle at 20% 20%, rgba(144, 202, 249, 0.1) 0%, transparent 25%),
+            radial-gradient(circle at 80% 80%, rgba(26, 35, 126, 0.1) 0%, transparent 25%);
+        pointer-events: none;
+    }
+
+    .enroll-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        backdrop-filter: blur(5px);
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .modal-content {
+        position: relative;
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        width: 90%;
+        max-width: 500px;
+        margin: 40px auto;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        transform: none;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .modal-header h3 {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.3;
+    }
+
+    .close-modal {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        color: #666;
+        cursor: pointer;
+        padding: 0.5rem;
+        line-height: 1;
+    }
+
+    .modal-form {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: grid;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        color: #2c3e50;
+        font-weight: 500;
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+
+    .form-group input,
+    .form-group select {
+        padding: 0.8rem 1rem;
+        border: 1px solid rgba(46, 125, 50, 0.2);
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        background: #ffffff;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--primary-green);
+        box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.1);
+    }
+
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .cancel-btn {
+        background: #f1f1f1;
+        border: none;
+        color: #666;
+    }
+
+    .submit-btn {
+        background: var(--primary-green);
+        border: none;
+        color: white;
+        flex: 1;
+    }
+
+    .cancel-btn:hover {
+        background: #e5e5e5;
+    }
+
+    .submit-btn:hover {
+        background: #1b5e20;
+    }
+
+    @media (max-width: 768px) {
+        .enroll-modal {
+            padding: 10px;
+        }
+
+        .modal-content {
+            padding: 1.5rem;
+            margin: 20px auto;
+            width: 95%;
+        }
+
+        .modal-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h3 {
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 0.7rem;
+            font-size: 1rem;
+        }
+
+        .form-actions {
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .cancel-btn,
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            font-size: 1rem;
+        }
+
+        input, select, button {
+            min-height: 44px;
+        }
+
+        .modal-form {
+            gap: 1rem;
+        }
+
+        .close-modal {
+            padding: 0.8rem;
+            font-size: 1.8rem;
+            margin: -0.8rem;
+        }
+    }
+
+    .submit-btn:active,
+    .cancel-btn:active {
+        transform: scale(0.98);
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    #program_name {
+        background: rgba(46, 125, 50, 0.03);
+        color: #2c3e50;
+        font-weight: 500;
+        cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media screen and (-webkit-min-device-pixel-ratio: 0) { 
+        select,
+        textarea,
+        input {
+            font-size: 16px !important;
+        }
+    }
+</style>
+
+<section class="courses-section">
+    <div class="courses-container">
+        <h1 class="section-title">Our Courses</h1>
+        <p class="section-subtitle">Explore our comprehensive Web Development 
+            courses for your success</p>
+
+                                    <div class="class-courses">
+                    <h2 class="class-title">Web Development Full Course</h2>
+                    <div class="courses-grid">
+                                                    <div class="course-card">
+                                <div class="course-header">
+                                    <h3 class="course-name">Build a responsive portfolio 
+                                      website by using HTML & CSS with SASS.</h3>
+                                </div>
+                                <div class="course-content">
+                                   
+                                    <div class="course-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Course Time: About 4 or 5 month</span>
+                                        </div>
+                                                                                    <div class="meta-item">
+                                                <i class="fas fa-book-open"></i>
+                                                <span>Lecture Number: 120</span>
+                                            </div>
+                                                                            </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-fee">
+                                        20$                                        <small>Admission Fee</small>
+                                    </div>
+                                    <a href="enroll.html" class="enroll-btn" data-program-id="1">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Enroll Now</span>
+                                    </a>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+
+
+
+
+
+                                    <div class="class-courses">
+                    <h2 class="class-title">Bootstrap 5 Essential Course</h2>
+                    <div class="courses-grid">
+                                                    <div class="course-card">
+                                <div class="course-header">
+                                    <h3 class="course-name">Build a responsive and modern look 
+                                      website by using bootstrap.</h3>
+                                </div>
+                                <div class="course-content">
+                                   
+                                    <div class="course-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Course Time: About 2 or 3 month</span>
+                                        </div>
+                                                                                    <div class="meta-item">
+                                                <i class="fas fa-book-open"></i>
+                                                <span>Lecture Number: 80</span>
+                                            </div>
+                                                                            </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-fee">
+                                        20$                                        <small>Admission Fee</small>
+                                    </div>
+                                    <a href="enroll3.html" class="enroll-btn" data-program-id="1">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Enroll Now</span>
+                                    </a>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+
+
+
+
+
+
+                            <div class="class-courses">
+                    <h2 class="class-title">AI Web development Full Course</h2>
+                    <div class="courses-grid">
+                                                    <div class="course-card">
+                                <div class="course-header">
+                                    <h3 class="course-name">Build a responsive website by using AI.</h3>
+                                </div>
+                                <div class="course-content">
+                                    <p class="course-description">
+                                                                            </p>
+                                    <div class="course-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Course Time: About 3 month</span>
+                                        </div>
+                                                                                    <div class="meta-item">
+                                                <i class="fas fa-book-open"></i>
+                                                <span>Lecture Number: 100</span>
+                                            </div>
+                                                                            </div>
+                                </div>
+                                <div class="course-footer">
+                                    <div class="course-fee">
+                                        15$                                        <small>Admission Fee</small>
+                                    </div>
+                                    <a href="enroll2.html" class="enroll-btn" data-program-id="2">
+                                        <i class="fas fa-user-plus"></i>
+                                        <span>Enroll Now</span>
+                                    </a>
+                                </div>
+                            </div>
+                                            </div>
+                </div>
+                        </div>
+</section>
+
+
+
+
+<!-- Add this modal HTML just before closing </section> -->
+<div class="enroll-modal" id="enrollModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Enrollment Form</h3>
+            <button class="close-modal">×</button>
+        </div>
+        <form id="enrollForm" class="modal-form">
+            <input type="hidden" name="program_id" id="programId">
+            
+            <div class="form-group">
+                <label for="program_name">Program</label>
+                <input type="text" id="program_name" name="program_name" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{11}" placeholder="01XXXXXXXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="current_class">Current Class</label>
+                <input type="text" id="current_class" name="current_class" required>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="school">School Name</label>
+                    <input type="text" id="school" name="school">
+                </div>
+
+                <div class="form-group">
+                    <label for="college">College Name</label>
+                    <input type="text" id="college" name="college">
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="cancel-btn">Cancel</button>
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Add this JavaScript before closing </body> -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('enrollModal');
+    const programNameInput = document.getElementById('program_name');
+    const enrollButtons = document.querySelectorAll('.enroll-btn');
+    const closeButton = modal.querySelector('.close-modal');
+    const cancelButton = modal.querySelector('.cancel-btn');
+    const enrollForm = document.getElementById('enrollForm');
+    let csrfToken = '';
+
+    // Function to get CSRF token
+    async function getCsrfToken() {
+        try {
+            const response = await fetch('process/get_token.php');
+            const data = await response.json();
+            return data.csrf_token;
+        } catch (error) {
+            console.error('Error getting CSRF token:', error);
+            return null;
+        }
+    }
+
+    // Open modal
+    enrollButtons.forEach(button => {
+        button.addEventListener('click', async function(e) {
+            e.preventDefault();
+            const card = this.closest('.course-card');
+            const courseName = card.querySelector('.course-name').textContent;
+            
+            // Get new CSRF token
+            csrfToken = await getCsrfToken();
+            if (!csrfToken) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Could not initialize form. Please try again.',
+                    confirmButtonColor: '#2e7d32'
+                });
+                return;
+            }
+
+            // Update form
+            programNameInput.value = courseName;
+            
+            // Add or update CSRF token input
+            let tokenInput = enrollForm.querySelector('input[name="csrf_token"]');
+            if (!tokenInput) {
+                tokenInput = document.createElement('input');
+                tokenInput.type = 'hidden';
+                tokenInput.name = 'csrf_token';
+                enrollForm.appendChild(tokenInput);
+            }
+            tokenInput.value = csrfToken;
+
+            // Show modal
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Form submission
+    enrollForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        const school = document.getElementById('school').value.trim();
+        const college = document.getElementById('college').value.trim();
+        
+        if (!school && !college) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                text: 'Please fill in either School Name or College Name'
+            });
+            return;
+        }
+
+        // Show loading state
+        Swal.fire({
+            title: 'Processing...',
+            text: 'Please wait while we submit your enrollment',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            showConfirmButton: false,
+            willOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        try {
+            const formData = new FormData(this);
+            
+            const response = await fetch('process/enroll.php', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Update CSRF token for next submission
+                csrfToken = result.csrf_token;
+                const tokenInput = enrollForm.querySelector('input[name="csrf_token"]');
+                if (tokenInput) {
+                    tokenInput.value = csrfToken;
+                }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Thank You!',
+                    text: 'Your enrollment request has been submitted successfully. We will contact you soon!',
+                    confirmButtonColor: '#2e7d32'
+                }).then(() => {
+                    closeModal();
+                });
+            } else {
+                throw new Error(result.message || 'Failed to submit enrollment');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Submission Error',
+                text: error.message || 'Something went wrong! Please try again later.',
+                confirmButtonColor: '#2e7d32'
+            });
+        }
+    });
+
+    // Close modal functions
+    function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        enrollForm.reset();
+    }
+
+    closeButton.addEventListener('click', closeModal);
+    cancelButton.addEventListener('click', closeModal);
+    
+    // Close on outside click
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Mobile number validation
+    const mobileInput = document.getElementById('mobile');
+    mobileInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) {
+            value = value.slice(0, 11);
+        }
+        e.target.value = value;
+    });
+});
+</script>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                 <h3>Mohammad Jaber Bin Razzak</h3>
+                <p>Excellence in Web Developing</p>
+                <div class="social-links">
+                     <a href="https://www.facebook.com/md.jaber.bin.razzak" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.youtube.com/channel/UCU5p4CqBgefJmY-fnjnYl2Q" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.linkedin.com/in/mohammed-jaber-bin-razzak-ba099a398/" target="_blank" class="linkedin"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/jaber69y9-cmd" target="_blank" class="github"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/her_jaber/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.threads.com/@her_jaber" target="_blank" class="threads"><i class="fab fa-threads"></i></a>
+                   <a href="https://x.com/jaber69y9" target="_blank" class="x"><i class="fab fa-x"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="courses.html">Courses</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-phone"></i> +8801870635347</p>
+                <p><i class="fab fa-whatsapp"></i>+8801870635347</p>
+                <p><i class="fas fa-envelope"></i>jaber69y9@gmail.com</p>                
+                <p><i class="fas fa-location-dot"></i>Malotinagor Matir Mosjid Lane,Bogura</p>
+                  <p><i class="fas fa-location-dot"></i>Fulbari Mohila College ,Bogura</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Mohammad Jaber Bin Razzak. All rights reserved.</p>
+            <p class="developer-info">Developed by<a href="dev.html" target="_blank"> Mohammad Jaber Bin Razzak</a> </p>
+        </div>
+    </footer>
+
+    <style>
+        /* Footer Styles */
+        footer {
+            background: linear-gradient(135deg, #1a237e 0%, #0d1642 100%);
+            color: white;
+            padding: 6rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #1a237e, #90caf9, #1a237e);
+            background-size: 200% 100%;
+            animation: gradientMove 3s linear infinite;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-section {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .footer-section:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .footer-section h3 {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            color: #fff;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: #90caf9;
+            transition: width 0.3s ease;
+        }
+
+        .footer-section:hover h3::after {
+            width: 100%;
+        }
+
+        .footer-section h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: #90caf9;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 1rem;
+            transform: translateX(0);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.5rem 1rem;
+            position: relative;
+        }
+
+        .footer-section ul li a::before {
+            content: '→';
+            margin-right: 8px;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            position: absolute;
+            left: -15px;
+        }
+
+        .footer-section ul li a:hover {
+            color: #90caf9;
+            transform: translateX(5px);
+        }
+
+        .footer-section ul li a:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            text-decoration: none;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.4rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            text-decoration: none !important;
+        }
+
+        .social-links a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #1a237e, #3949ab);
+            opacity: 0;
+            transition: all 0.4s ease;
+            transform: translateY(100%);
+            z-index: 1;
+            text-decoration: none;
+        }
+
+        .social-links a i {
+            position: relative;
+            z-index: 2;
+            margin: 0;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(26, 35, 126, 0.3);
+        }
+
+        .social-links a:hover::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .social-links a:hover i {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .social-links a.facebook::before {
+            background: linear-gradient(45deg, #1877F2, #3b5998);
+        }
+
+        .social-links a.youtube::before {
+            background: linear-gradient(45deg, #FF0000, #c4302b);
+        }
+
+        .social-links a.group::before {
+            background: linear-gradient(45deg, #1a237e, #3949ab);
+        }
+
+        .social-links a.group i {
+            font-size: 1.2rem;
+        }
+
+        .footer-section i {
+            margin-right: 12px;
+            color: #90caf9;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section p:hover i {
+            transform: scale(1.2);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .footer-bottom::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: #90caf9;
+        }
+
+        .footer-bottom p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .developer-info {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .developer-info a {
+            color: #90caf9;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .developer-info a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #90caf9;
+            transition: width 0.3s ease;
+        }
+
+        .developer-info a:hover {
+            color: #fff;
+        }
+
+        .developer-info a:hover::after {
+            width: 100%;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 200% 0%;
+            }
+        }
+
+        /* Responsive Footer */
+        @media (max-width: 768px) {
+            footer {
+                padding: 4rem 1.5rem 1.5rem;
+            }
+
+            .footer-content {
+                gap: 2.5rem;
+            }
+
+            .footer-section {
+                text-align: center;
+                padding: 0 1rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.8rem;
+            }
+
+            .footer-section p {
+                font-size: 0.95rem;
+            }
+
+            .footer-section ul {
+                max-width: 200px;
+                margin: 0 auto;
+            }
+
+            .footer-section ul li {
+                margin-bottom: 1rem;
+            }
+
+            .footer-section ul li a {
+                font-size: 0.95rem;
+            }
+
+            .social-links {
+                justify-content: center;
+                gap: 1.2rem;
+                margin-top: 1.5rem;
+            }
+
+            .footer-bottom {
+                margin-top: 3rem;
+                padding: 1.5rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            footer {
+                padding: 3rem 1rem 1rem;
+            }
+
+            .footer-content {
+                gap: 2rem;
+            }
+
+            .footer-section {
+                padding: 0;
+            }
+
+            .footer-section h3 {
+                font-size: 1.6rem;
+            }
+
+            .footer-section h4 {
+                font-size: 1.2rem;
+            }
+
+            .footer-section p {
+                font-size: 0.9rem;
+            }
+
+            .footer-section ul {
+                max-width: 180px;
+            }
+
+            .footer-section ul li {
+                margin-bottom: 0.8rem;
+            }
+
+            .footer-section ul li a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .social-links {
+                gap: 1rem;
+            }
+
+            .social-links a {
+                width: 38px;
+                height: 38px;
+                font-size: 1.2rem;
+            }
+
+            .social-links a.group i {
+                font-size: 1.1rem;
+            }
+
+            .footer-bottom {
+                margin-top: 2rem;
+                padding: 1.2rem 0.5rem;
+            }
+
+            .footer-bottom p {
+                font-size: 0.85rem;
+                margin-bottom: 0.3rem;
+            }
+
+            .developer-info {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+      <script src="app.js"></script>
+  
+</body>
+</html>  
