@@ -20,43 +20,52 @@
     <link rel="stylesheet" href="style.css">
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-<div id="robot-verify-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:#f4f4f4; z-index:2147483647; display:flex; justify-content:center; align-items:center; font-family: sans-serif;">
-    <div style="background:white; padding:40px; border-radius:10px; text-align:center; box-shadow:0 5px 25px rgba(0,0,0,0.2);">
-        <h2 style="color:#333; margin-bottom:10px;">Security Check</h2>
-        <p style="color:#666; margin-bottom:25px;">Please verify that you are not a robot to enter.</p>
+<div id="robot-blocker" style="
+    position: fixed; 
+    top: 0; left: 0; 
+    width: 100%; height: 100%; 
+    background: #ffffff; 
+    display: flex; 
+    justify-content: center; /* Horizontally Center */
+    align-items: center;     /* Vertically Center */
+    z-index: 9999999; 
+    font-family: 'Segoe UI', Arial, sans-serif;">
+
+    <div style="
+        background: white; 
+        padding: 40px; 
+        border-radius: 15px; 
+        text-align: center; 
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1); 
+        border: 1px solid #eee; 
+        width: 100%;
+        max-width: 380px;">
         
-        <div class="g-recaptcha" 
-             data-sitekey="6LfvPE4sAAAAAOnAMU4qpl-x_lAQF5SNy5t2eK4D" 
-             data-callback="onCaptchaSuccess"></div>
-             
-        <p id="captcha-error" style="color:red; margin-top:15px; display:none;">Verification failed. Please try again.</p>
+        <h2 style="color: #333; margin: 0 0 10px 0; font-size: 29px;">Security Check</h2>
+        <p style="color: #666; margin-bottom: 25px; font-size: 15px; line-height: 1.5;">
+            To help keep our site secure, please complete the verification below.
+        </p>
+        
+        <div style="display: inline-block;">
+            <div class="g-recaptcha" 
+                 data-sitekey="6LfvPE4sAAAAAOnAMU4qpl-x_lAQF5SNy5t2eK4D" 
+                 data-callback="verifyHuman"></div>
+        </div>
     </div>
 </div>
 
 <script>
-    // Page load hobar shathe shathe check korbe age verify hoyeche kina
-    (function() {
-        if (sessionStorage.getItem('robot_verified') === 'true') {
-            document.getElementById('robot-verify-overlay').style.display = 'none';
-        }
-    })();
+    // Screen scroll bondho rakhbe jotokhon na verify hochche
+    document.body.style.overflow = 'hidden';
 
-    // Google Captcha Success Function
-    function onCaptchaSuccess(token) {
-        if (token) {
-            // Session-e save korbe jate refresh dile ar na ashe
-            sessionStorage.setItem('robot_verified', 'true');
+    function verifyHuman(token) {
+        if (token.length !== 0) {
+            // Success hole overlay-ti vanished hoye jabe
+            const overlay = document.getElementById('robot-blocker');
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Scroll unlock hobe
             
-            // Dhire dhire overlay-ti muche jabe (Fade out)
-            var overlay = document.getElementById('robot-verify-overlay');
-            overlay.style.transition = "opacity 0.5s ease";
-            overlay.style.opacity = "0";
-            
-            setTimeout(function() {
-                overlay.style.display = 'none';
-            }, 500);
-        } else {
-            document.getElementById('captcha-error').style.display = 'block';
+            console.log("Verified for this visit.");
         }
     }
 </script>
@@ -3273,4 +3282,5 @@ let counter = setInterval(() => {
 </html> 
 
  
+
 
