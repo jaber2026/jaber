@@ -66,4 +66,20 @@ document[_0x1a2b[3]]=function(e){if(event.keyCode==123||(e.ctrlKey&&e.shiftKey&&
     };
 
 
+ src="https://pl28398674.effectivegatecpm.com/f7/74/35/f77435a79bfbd259b067414b3808f93d.js"
+
+ src="https://pl28505783.effectivegatecpm.com/bd/06/ed/bd06ed1c4945d6b54f6687fc567308e7.js"
+
+  atOptions = {
+    'key' : 'cd6ea5b89f5d276368a5add5fb9f6ef4',
+    'format' : 'iframe',
+    'height' : 300,
+    'width' : 160,
+    'params' : {}
+  };
+
+ src="https://www.highperformanceformat.com/cd6ea5b89f5d276368a5add5fb9f6ef4/invoke.js"
+
+
+
 
